@@ -27,8 +27,6 @@ app.use(
 connectDB();
 
 // app.set('port', env.PORT || process.env.PORT || 3000); // PORT changed to 3000 as suggested by Adaptable deployment.
-// Use port number from the PORT environment variable or 3000 if not specified
-const port = process.env.PORT || 3000;
 
 // to enable retrieval and send ability of json
 app.use(express.json());
@@ -41,8 +39,8 @@ app.use('/api/borrows', routers.borrows);
 // Custom API error handler
 app.use(apiErrorHandler);
 
-app.listen(port, () => {
-  console.log(`App listening at http://localhost:${port}`);
-});
+// app.listen(port, () => {
+//   console.log(`App listening at http://localhost:${port}`);
+// });
 
 export default app;
