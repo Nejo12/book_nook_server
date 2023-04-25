@@ -26,7 +26,7 @@ app.use(
 
 connectDB();
 
-app.set('port', env.PORT);
+app.set('port', env.PORT || process.env.PORT || 5001); // as suggested by adaptative deployment.
 
 // to enable retrieval and send ability of json
 app.use(express.json());
