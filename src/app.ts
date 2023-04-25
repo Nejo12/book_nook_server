@@ -38,8 +38,4 @@ app.use('/api/borrows', routers.borrows);
 // Custom API error handler
 app.use(apiErrorHandler);
 
-// app.listen(port, () => {
-//   console.log(`App listening at http://localhost:${port}`);
-// });
-
 export default app;
