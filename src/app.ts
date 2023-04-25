@@ -31,8 +31,8 @@ connectDB();
 app.use(express.json());
 
 // Use routers
-app.use('/api/books', routers.books);
 app.use('/api/users', routers.users);
+app.use('/api/books', routers.books);
 app.use('/api/borrows', routers.borrows);
 
 // Custom API error handler
