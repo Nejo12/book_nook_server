@@ -12,9 +12,8 @@ import { UserDocument } from '../types/types';
 import UserService from '../services/user';
 import validateLoginInput from '../helpers/login';
 import validateRegisterInput from '../helpers/register';
-import env from '../util/validate_env';
 
-const secret = Buffer.from(env.JWT_SECRET).toString('base64');
+const secret = Buffer.from(process.env.JWT_SECRET).toString('base64');
 // Register new user
 const register = async (req: Request, res: Response, next: NextFunction) => {
   // bring in custom validation

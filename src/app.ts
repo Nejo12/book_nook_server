@@ -6,7 +6,6 @@ import cookieSession from 'cookie-session';
 
 import routers from './routers';
 import connectDB from './config/db';
-import env from '../src/util/validate_env';
 import apiErrorHandler from './middlewares/apiErrorHandler';
 
 const app = express();
@@ -20,7 +19,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(
   cookieSession({
     maxAge: 60 * 60 * 24 * 1000, // a day
-    keys: [env.COOKIE_KEY],
+    keys: [process.env.COOKIE_KEY],
   }),
 );
 

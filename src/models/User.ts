@@ -2,10 +2,9 @@ import { Schema, model } from 'mongoose';
 import jwt from 'jsonwebtoken';
 import bcrypt from 'bcrypt';
 
-import env from '../util/validate_env';
 import { IUser, UserDocument } from '../types/types';
 
-const secret = Buffer.from(env.JWT_SECRET).toString('base64');
+const secret = Buffer.from(process.env.JWT_SECRET).toString('base64');
 
 const userSchema = new Schema({
   googleId: { type: 'String' }, // set in prep for google login
