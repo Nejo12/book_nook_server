@@ -12,30 +12,41 @@ const app = express();
 
 // Use common 3rd-party middlewares
 // app.use(cors());
-app.use(
-  cors({
-    origin: ['https://the-booknook.netlify.app'], // the link of my front-end app on Netlify
-    methods: ['GET', 'POST'],
-    credentials: true,
-  }),
-);
 
-app.use((req, res, next) => {
-  res.setHeader(
-    'Access-Control-Allow-Origin',
-    'https://the-booknook.netlify.app',
-  ); // the link of my front-end app on Netlify
-  res.setHeader(
-    'Access-Control-Allow-Headers',
-    'Origin, X-Requested-With, Content-Type, Accept',
-  );
-  res.setHeader(
-    'Access-Control-Allow-Methods',
-    'GET, POST, PATCH, DELETE, OPTIONS',
-  );
-  res.setHeader('content-type', 'application/json');
-  next();
-});
+const corsOptions = {
+  origin: '*',
+  credentials: true, //access-control-allow-credentials:true
+  optionSuccessStatus: 200,
+};
+
+app.use(cors(corsOptions));
+
+// app.use(
+//   cors({
+//     origin: ['https://the-booknook.netlify.app'], // the link of my front-end app on Netlify
+//     methods: ['GET', 'POST'],
+//     credentials: true,
+//   }),
+// );
+
+// app.use((req, res, next) => {
+//   res.setHeader(
+//     'Access-Control-Allow-Origin',
+//     '*',
+//     // 'https://the-booknook.netlify.app',
+//   ); // the link of my front-end app on Netlify
+//   res.setHeader(
+//     'Access-Control-Allow-Headers',
+//     'Origin, X-Requested-With, Content-Type, Accept',
+//   );
+//   res.setHeader(
+//     'Access-Control-Allow-Methods',
+//     'GET, POST, PATCH, DELETE, OPTIONS',
+//   );
+//   res.setHeader('Content-Type', 'application/json');
+//   next();
+// });
+
 // app.use(
 //   cors({
 //     origin: 'https://the-booknook.netlify.app',
