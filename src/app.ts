@@ -11,7 +11,29 @@ import apiErrorHandler from './middlewares/apiErrorHandler';
 const app = express();
 
 // Use common 3rd-party middlewares
-app.use(cors());
+// app.use(cors());
+// app.use('*', cors())
+// const corsOptions = {
+//   origin: '*',
+//   optionsSuccessStatus: 200,
+// };
+// app.use(cors(corsOptions));
+
+// app.use(
+//   cors({
+//     origin: 'https://the-booknook.netlify.app',
+//     allowedHeaders: ['Content-Type'],
+//     credentials: true,
+//   }),
+// );
+
+app.use(
+  cors({
+    origin: 'https://the-booknook.netlify.app',
+  }),
+);
+app.options('*', cors());
+
 app.use(morgan('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
