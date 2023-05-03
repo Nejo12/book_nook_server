@@ -57,7 +57,8 @@ const borrowBook = async (req: Request, res: Response, next: NextFunction) => {
 
 // Get all borrowed books by user
 const getBorrowedBooks = async (req: Request, res: Response) => {
-  const userId = req.query.userId as string;
+  // @ts-ignore
+  const userId: string = req.query.user._id;
   const _bookList: any = [];
   const books = await Borrow.find({ userId });
   for (let i = 0; i < books.length; i++) {
