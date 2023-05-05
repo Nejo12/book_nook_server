@@ -3,6 +3,7 @@ import express from 'express';
 import morgan from 'morgan';
 import cors from 'cors';
 import cookieSession from 'cookie-session';
+const cors_proxy = require('cors-anywhere');
 
 import routers from './routers';
 import connectDB from './config/db';
@@ -13,10 +14,25 @@ const app = express();
 // Use common 3rd-party middlewares
 app.use(cors());
 
-app.use((req, res, next) => {
-  res.header('Access-Control-Allow-Origin', '*');
-  next();
-});
+// Listen on a specific host via the HOST environment variable
+const host = process.env.HOST || '0.0.0.0';
+// Listen on a specific port via the PORT environment variable
+const port = process.env.PORT || 8080;
+
+cors_proxy
+  .createServer({
+    originWhitelist: [], // Allow all origins
+    requireHeader: ['origin', 'x-requested-with'],
+    removeHeaders: ['cookie', 'cookie2'],
+  })
+  .listen(port, host, function () {
+    console.log('Running CORS Anywhere on ' + host + ':' + port);
+  });
+
+// app.use((req, res, next) => {
+//   res.header('Access-Control-Allow-Origin', '*');
+//   next();
+// });
 // const corsOptions = {
 //   origin: '*',
 //   credentials: true, //access-control-allow-credentials:true
