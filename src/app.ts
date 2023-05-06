@@ -11,52 +11,11 @@ import apiErrorHandler from './middlewares/apiErrorHandler';
 const app = express();
 
 // Use common 3rd-party middlewares
-app.use(cors());
-
-// app.use((req, res, next) => {
-//   res.setHeader('Access-Control-Allow-Origin', '*');
-//   next();
-// });
-
 const corsOptions = {
   origin: '*',
-  credentials: true, //access-control-allow-credentials:true
+  credentials: true,
   optionSuccessStatus: 200,
 };
-app.use(cors(corsOptions));
-
-// app.use(
-//   cors({
-//     origin: ['https://the-booknook.netlify.app'], // the link of my front-end app on Netlify
-//     methods: ['GET', 'POST'],
-//     credentials: true,
-//   }),
-// );
-
-// app.use((req, res, next) => {
-//   res.setHeader(
-//     'Access-Control-Allow-Origin',
-//     'https://the-booknook.netlify.app',
-//   ); // the link of my front-end app on Netlify
-//   res.setHeader(
-//     'Access-Control-Allow-Headers',
-//     'Origin, X-Requested-With, Content-Type, Accept',
-//   );
-//   res.setHeader(
-//     'Access-Control-Allow-Methods',
-//     'GET, POST, PATCH, DELETE, OPTIONS',
-//   );
-//   res.setHeader('Content-Type', 'application/json');
-//   next();
-// });
-
-// app.use(
-//   cors({
-//     origin: 'https://the-booknook.netlify.app',
-//   }),
-// );
-// app.options('*', cors());
-
 app.use(morgan('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -70,15 +29,12 @@ app.use(
 
 connectDB();
 
-// app.set('port', env.PORT || process.env.PORT || 3000); // PORT changed to 3000 as suggested by Adaptable deployment.
-
-// to enable retrieval and send ability of json
 app.use(express.json());
 
 // Use routers
-app.use('/api/users', routers.users);
-app.use('/api/books', routers.books);
-app.use('/api/borrows', routers.borrows);
+app.use('/api/users', cors(corsOptions), routers.users);
+app.use('/api/books', cors(corsOptions), routers.books);
+app.use('/api/borrows', cors(corsOptions), routers.borrows);
 
 // Custom API error handler
 app.use(apiErrorHandler);
