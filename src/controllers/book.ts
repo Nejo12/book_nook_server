@@ -78,7 +78,6 @@ const getBook: RequestHandler = async (
   res: Response,
   next: NextFunction,
 ) => {
-  console.log('req is here:::', req.query);
   const bookId = req.params.bookId as string;
   const userId = req.query.userId as string;
   let isBorrowed = false;

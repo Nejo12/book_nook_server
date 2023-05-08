@@ -47,7 +47,6 @@ const allowIfLoggedIn = async (
 ) => {
   try {
     const user = res.locals.loggedInUser; // Holds the details of the logged-in user
-    console.log('user', user);
     if (!user)
       return res
         .status(401)
